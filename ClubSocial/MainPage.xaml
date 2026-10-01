@@ -7,216 +7,377 @@
     xmlns:viewmodels="clr-namespace:ClubSocial.ViewModels"
     x:Class="ClubSocial.MainPage"
     x:DataType="viewmodels:SociosViewModel"
-    Title="Socios del club"
-    BackgroundColor="#F5F5F5">
+    Title="Administración de socios"
+    BackgroundColor="#EEF2F5"
+    Shell.BackgroundColor="#203A54"
+    Shell.ForegroundColor="White"
+    Shell.TitleColor="White">
 
-    <Grid Padding="16"
-          RowDefinitions="Auto,Auto,Auto,*"
-          RowSpacing="12">
+    <ContentPage.Resources>
 
-        <Label
-            Grid.Row="0"
-            Text="Club Social - Administración"
-            FontSize="22"
-            FontAttributes="Bold"
-            TextColor="#203A54" />
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#243447" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
 
-        <VerticalStackLayout Grid.Row="1" Spacing="6">
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="#172B3A" />
+            <Setter Property="PlaceholderColor" Value="#596675" />
+            <Setter Property="BackgroundColor" Value="#F1F4F7" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="MinimumHeightRequest" Value="48" />
+        </Style>
 
-            <HorizontalStackLayout Spacing="10">
+        <Style TargetType="Picker">
+            <Setter Property="TextColor" Value="#172B3A" />
+            <Setter Property="TitleColor" Value="#596675" />
+            <Setter Property="BackgroundColor" Value="#F1F4F7" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="MinimumHeightRequest" Value="48" />
+        </Style>
 
-                <Button
-                    Text="Cargar socios"
-                    Command="{Binding CargarSociosCommand}"
-                    BackgroundColor="#203A54"
-                    TextColor="White" />
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#203A54" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="MinimumHeightRequest" Value="48" />
+            <Setter Property="Padding" Value="12,8" />
+        </Style>
+
+    </ContentPage.Resources>
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="16"
+            Spacing="18"
+            MaximumWidthRequest="760"
+            HorizontalOptions="Fill">
+
+            <!-- Encabezado de la sección -->
+            <VerticalStackLayout Spacing="5">
+
+                <Label
+                    Text="Club Social"
+                    FontSize="28"
+                    FontAttributes="Bold"
+                    TextColor="#203A54" />
+
+                <Label
+                    Text="Registro y administración de socios"
+                    FontSize="15"
+                    TextColor="#526171" />
+
+            </VerticalStackLayout>
+
+            <!-- Formulario de alta y edición -->
+            <Border
+                BackgroundColor="White"
+                Stroke="#D6DEE6"
+                StrokeThickness="1"
+                Padding="18">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="14">
+
+                    <Label
+                        Text="{Binding TituloFormulario}"
+                        FontSize="21"
+                        FontAttributes="Bold"
+                        TextColor="#203A54" />
+
+                    <Label
+                        Text="Nombre, apellido, DNI y sector son obligatorios."
+                        TextColor="#526171" />
+
+                    <VerticalStackLayout Spacing="5">
+
+                        <Label
+                            Text="Nombre"
+                            FontAttributes="Bold" />
+
+                        <Entry
+                            Placeholder="Ingresá el nombre"
+                            Text="{Binding Nombre, Mode=TwoWay}" />
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+
+                        <Label
+                            Text="Apellido"
+                            FontAttributes="Bold" />
+
+                        <Entry
+                            Placeholder="Ingresá el apellido"
+                            Text="{Binding Apellido, Mode=TwoWay}" />
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+
+                        <Label
+                            Text="DNI"
+                            FontAttributes="Bold" />
+
+                        <Entry
+                            Placeholder="Sin puntos ni espacios"
+                            Keyboard="Numeric"
+                            MaxLength="8"
+                            Text="{Binding Dni, Mode=TwoWay}" />
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+
+                        <Label
+                            Text="Teléfono"
+                            FontAttributes="Bold" />
+
+                        <Entry
+                            Placeholder="Número de contacto"
+                            Keyboard="Telephone"
+                            Text="{Binding Telefono, Mode=TwoWay}" />
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+
+                        <Label
+                            Text="Email"
+                            FontAttributes="Bold" />
+
+                        <Entry
+                            Placeholder="Opcional"
+                            Keyboard="Email"
+                            Text="{Binding Email, Mode=TwoWay}" />
+
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="5">
+
+                        <Label
+                            Text="Sector del club"
+                            FontAttributes="Bold" />
+
+                        <Label
+                            Text="Tocá el campo para elegir una opción."
+                            FontSize="12"
+                            TextColor="#526171" />
+
+                        <Border
+                            BackgroundColor="#F1F4F7"
+                            Stroke="#8798AA"
+                            StrokeThickness="1"
+                            Padding="10,0">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+
+                            <Grid ColumnDefinitions="*,30">
+
+                                <Picker
+                                    Grid.ColumnSpan="2"
+                                    Title="Elegir sector"
+                                    ItemsSource="{Binding Sectores}"
+                                    SelectedItem="{Binding SectorSeleccionado, Mode=TwoWay}"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#172B3A"
+                                    TitleColor="#526171"
+                                    MinimumHeightRequest="52" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="▼"
+                                    TextColor="#203A54"
+                                    FontSize="16"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    InputTransparent="True" />
+
+                            </Grid>
+
+                        </Border>
+
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,Auto">
+
+                        <VerticalStackLayout
+                            Grid.Column="0"
+                            VerticalOptions="Center"
+                            Spacing="3">
+
+                            <Label
+                                Text="Socio activo"
+                                FontAttributes="Bold" />
+
+                            <Label
+                                Text="Desactivarlo conserva sus datos."
+                                FontSize="12"
+                                TextColor="#526171" />
+
+                        </VerticalStackLayout>
+
+                        <Switch
+                            Grid.Column="1"
+                            IsToggled="{Binding Activo, Mode=TwoWay}"
+                            OnColor="#203A54"
+                            ThumbColor="#687A8B"
+                            VerticalOptions="Center" />
+
+                    </Grid>
+
+                    <Button
+                        Text="Guardar socio"
+                        Command="{Binding GuardarSocioCommand}" />
+
+                    <Button
+                        Text="Nuevo socio / Cancelar edición"
+                        Command="{Binding NuevoSocioCommand}"
+                        BackgroundColor="#E6ECF2"
+                        TextColor="#203A54" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Mensaje de la última operación -->
+            <Grid
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="10">
 
                 <ActivityIndicator
+                    Grid.Column="0"
                     IsRunning="{Binding EstaOcupado}"
                     IsVisible="{Binding EstaOcupado}"
                     Color="#203A54"
                     VerticalOptions="Center" />
 
-            </HorizontalStackLayout>
-
-            <Label
-                Text="{Binding Mensaje}"
-                TextColor="#333333"
-                FontSize="14" />
-
-        </VerticalStackLayout>
-
-        <VerticalStackLayout Grid.Row="2" Spacing="8">
-
-            <Label
-                Text="{Binding TituloFormulario}"
-                FontSize="18"
-                FontAttributes="Bold"
-                TextColor="#203A54" />
-
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-
-                <Entry
-                    Grid.Column="0"
-                    Placeholder="Nombre"
-                    Text="{Binding Nombre, Mode=TwoWay}"
-                    TextColor="#222222"
-                    PlaceholderColor="#666666" />
-
-                <Entry
-                    Grid.Column="1"
-                    Placeholder="Apellido"
-                    Text="{Binding Apellido, Mode=TwoWay}"
-                    TextColor="#222222"
-                    PlaceholderColor="#666666" />
-
-            </Grid>
-
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-
-                <Entry
-                    Grid.Column="0"
-                    Placeholder="DNI sin puntos"
-                    Keyboard="Numeric"
-                    MaxLength="8"
-                    Text="{Binding Dni, Mode=TwoWay}"
-                    TextColor="#222222"
-                    PlaceholderColor="#666666" />
-
-                <Entry
-                    Grid.Column="1"
-                    Placeholder="Teléfono"
-                    Keyboard="Telephone"
-                    Text="{Binding Telefono, Mode=TwoWay}"
-                    TextColor="#222222"
-                    PlaceholderColor="#666666" />
-
-            </Grid>
-
-            <Entry
-                Placeholder="Email (opcional)"
-                Keyboard="Email"
-                Text="{Binding Email, Mode=TwoWay}"
-                TextColor="#222222"
-                PlaceholderColor="#666666" />
-
-            <Picker
-                Title="Seleccioná un sector"
-                ItemsSource="{Binding Sectores}"
-                SelectedItem="{Binding SectorSeleccionado, Mode=TwoWay}"
-                TextColor="#222222"
-                TitleColor="#666666" />
-
-            <HorizontalStackLayout Spacing="10">
-
                 <Label
-                    Text="Socio activo"
-                    TextColor="#222222"
+                    Grid.Column="1"
+                    Text="{Binding Mensaje}"
+                    TextColor="#203A54"
+                    FontAttributes="Bold"
+                    LineBreakMode="WordWrap"
                     VerticalOptions="Center" />
 
-                <Switch
-                    IsToggled="{Binding Activo, Mode=TwoWay}"
-                    OnColor="#203A54" />
-
-            </HorizontalStackLayout>
-
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-
-                <Button
-                    Grid.Column="0"
-                    Text="Guardar socio"
-                    Command="{Binding GuardarSocioCommand}"
-                    BackgroundColor="#203A54"
-                    TextColor="White" />
-
-                <Button
-                    Grid.Column="1"
-                    Text="Nuevo / Cancelar edición"
-                    Command="{Binding NuevoSocioCommand}"
-                    BackgroundColor="#DDDDDD"
-                    TextColor="#222222" />
-
             </Grid>
+
+            <VerticalStackLayout Spacing="10">
+
+                <Label
+                    Text="Socios registrados"
+                    FontSize="21"
+                    FontAttributes="Bold"
+                    TextColor="#203A54" />
+
+                <Button
+                    Text="Actualizar lista"
+                    Command="{Binding CargarSociosCommand}" />
+
+            </VerticalStackLayout>
+
+            <!-- La lista se desplaza junto con el formulario -->
+            <VerticalStackLayout
+                Spacing="12"
+                BindableLayout.ItemsSource="{Binding Socios}">
+
+                <BindableLayout.EmptyView>
+
+                    <Label
+                        Text="La lista está vacía. Actualizala o registrá un nuevo socio."
+                        Margin="0,8"
+                        TextColor="#526171" />
+
+                </BindableLayout.EmptyView>
+
+                <BindableLayout.ItemTemplate>
+
+                    <DataTemplate x:DataType="models:Socio">
+
+                        <Border
+                            BackgroundColor="White"
+                            Stroke="#D6DEE6"
+                            StrokeThickness="1"
+                            Padding="16">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="10" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout Spacing="9">
+
+                                <VerticalStackLayout Spacing="2">
+
+                                    <Label
+                                        Text="{Binding Apellido}"
+                                        FontSize="18"
+                                        FontAttributes="Bold"
+                                        TextColor="#172B3A"
+                                        LineBreakMode="WordWrap" />
+
+                                    <Label
+                                        Text="{Binding Nombre}"
+                                        FontSize="16"
+                                        TextColor="#172B3A"
+                                        LineBreakMode="WordWrap" />
+
+                                </VerticalStackLayout>
+
+                                <Label
+                                    Text="{Binding Dni, StringFormat='DNI: {0}'}" />
+
+                                <Label
+                                    Text="{Binding Sector, StringFormat='Sector: {0}'}" />
+
+                                <Label
+                                    Text="{Binding EstadoTexto, StringFormat='Estado: {0}'}"
+                                    TextColor="#203A54"
+                                    FontAttributes="Bold" />
+
+                                <Label
+                                    Text="{Binding FechaAlta, StringFormat='Fecha de alta: {0:dd/MM/yyyy}'}"
+                                    TextColor="#526171" />
+
+                                <Grid
+                                    ColumnDefinitions="*,*"
+                                    ColumnSpacing="10"
+                                    Margin="0,5,0,0">
+
+                                    <Button
+                                        Grid.Column="0"
+                                        Text="Editar"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SociosViewModel}}, Path=EditarSocioCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        Text="Eliminar"
+                                        BackgroundColor="#A83232"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SociosViewModel}}, Path=EliminarSocioCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                </Grid>
+
+                            </VerticalStackLayout>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </BindableLayout.ItemTemplate>
+
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
 
-        <CollectionView
-            Grid.Row="3"
-            ItemsSource="{Binding Socios}"
-            SelectionMode="None">
-
-            <CollectionView.EmptyView>
-                <Label
-                    Text="No hay socios en la lista. Cargá los registros o agregá uno."
-                    Margin="0,12"
-                    TextColor="#555555" />
-            </CollectionView.EmptyView>
-
-            <CollectionView.ItemTemplate>
-
-                <DataTemplate x:DataType="models:Socio">
-
-                    <VerticalStackLayout
-                        Padding="10"
-                        Spacing="5">
-
-                        <HorizontalStackLayout Spacing="5">
-
-                            <Label
-                                Text="{Binding Apellido}"
-                                FontAttributes="Bold"
-                                TextColor="#222222" />
-
-                            <Label
-                                Text="{Binding Nombre}"
-                                FontAttributes="Bold"
-                                TextColor="#222222" />
-
-                        </HorizontalStackLayout>
-
-                        <Label
-                            Text="{Binding Dni, StringFormat='DNI: {0}'}"
-                            TextColor="#444444" />
-
-                        <Label
-                            Text="{Binding Sector, StringFormat='Sector: {0}'}"
-                            TextColor="#444444" />
-
-                        <Label
-                            Text="{Binding Activo, StringFormat='Activo: {0}'}"
-                            TextColor="#444444" />
-
-                        <HorizontalStackLayout Spacing="10">
-
-                            <Button
-                                Text="Editar"
-                                BackgroundColor="#203A54"
-                                TextColor="White"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SociosViewModel}}, Path=EditarSocioCommand}"
-                                CommandParameter="{Binding .}" />
-
-                            <Button
-                                Text="Eliminar"
-                                BackgroundColor="#A83232"
-                                TextColor="White"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:SociosViewModel}}, Path=EliminarSocioCommand}"
-                                CommandParameter="{Binding .}" />
-
-                        </HorizontalStackLayout>
-
-                        <BoxView
-                            HeightRequest="1"
-                            BackgroundColor="#CCCCCC"
-                            Margin="0,5" />
-
-                    </VerticalStackLayout>
-
-                </DataTemplate>
-
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
-
-    </Grid>
+    </ScrollView>
 
 </ContentPage>

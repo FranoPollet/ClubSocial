@@ -30,5 +30,8 @@ namespace ClubSocial.Models
         public DateTime FechaAlta { get; set; } = DateTime.Today;
 
         public bool Activo { get; set; } = true;
+
+        //Texo para mostrar el estado en la pantalla
+        public string EstadoTexto => Activo ? "Activo" : "Inactivo";
     }
 }
