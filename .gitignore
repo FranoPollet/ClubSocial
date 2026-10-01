@@ -1,0 +1,17 @@
+# Archivos locales de Visual Studio
+.vs/
+*.user
+*.suo
+
+# Archivos generados al compilar
+[Bb]in/
+[Oo]bj/
+
+# Resultados de pruebas
+TestResults/
+
+# Bases locales de la aplicación
+*.db
+*.db3
+*.sqlite
+*.sqlite3
