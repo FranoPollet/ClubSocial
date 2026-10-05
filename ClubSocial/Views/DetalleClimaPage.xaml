@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodels="clr-namespace:ClubSocial.ViewModels"
+    x:Class="ClubSocial.Views.DetalleClimaPage"
+    x:DataType="viewmodels:DetalleClimaViewModel"
+    Title="Detalle del pronóstico"
+    BackgroundColor="#EEF2F5">
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label
+                Text="Pronóstico del día"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="#203A54" />
+
+            <Label
+                Text="Buenos Aires · Ubicación de ejemplo"
+                TextColor="#526171" />
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#D6DEE6"
+                Padding="20">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="16">
+
+                    <Label
+                        Text="{Binding Dia.Fecha, StringFormat='{0:dd/MM/yyyy}'}"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="#172B3A" />
+
+                    <Label
+                        Text="{Binding Dia.TemperaturaMinima, StringFormat='Temperatura mínima: {0:F1} °C'}"
+                        FontSize="17"
+                        TextColor="#172B3A" />
+
+                    <Label
+                        Text="{Binding Dia.TemperaturaMaxima, StringFormat='Temperatura máxima: {0:F1} °C'}"
+                        FontSize="17"
+                        TextColor="#172B3A" />
+
+                    <Label
+                        Text="{Binding Dia.ProbabilidadLluvia, StringFormat='Probabilidad máxima de precipitación: {0:F0} %'}"
+                        FontSize="17"
+                        TextColor="#172B3A" />
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <Label
+                Text="La probabilidad de precipitación expresa una posibilidad, no la cantidad de agua que caerá."
+                TextColor="#526171" />
+
+            <Label
+                Text="Fuente: Open-Meteo · open-meteo.com · CC BY 4.0"
+                FontSize="12"
+                TextColor="#526171" />
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

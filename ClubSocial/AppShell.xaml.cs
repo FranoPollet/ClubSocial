@@ -1,14 +1,20 @@
-﻿using Microsoft.Maui.Controls;
+﻿using ClubSocial.Views;
+using Microsoft.Maui.Controls;
 
 namespace ClubSocial
 {
     public partial class AppShell : Shell
     {
-        public AppShell(MainPage mainPage)
+        public AppShell(MainPage mainPage, ClimaPage climaPage)
         {
             InitializeComponent();
-            // Esta página ya viene con su ViewModel.
+
             SociosContent.Content = mainPage;
+            ClimaContent.Content = climaPage;
+
+            Routing.RegisterRoute(
+                "detalleClima",
+                typeof(DetalleClimaPage));
         }
     }
 }

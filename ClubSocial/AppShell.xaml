@@ -1,15 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
+
 <Shell
-    x:Class="ClubSocial.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:ClubSocial"
-    Shell.FlyoutBehavior="Disabled"
-    Title="Club Social">
+    x:Class="ClubSocial.AppShell"
+    Title="Club Social"
+    FlyoutBehavior="Disabled"
+    BackgroundColor="#203A54"
+    ForegroundColor="White"
+    TitleColor="White"
+    Shell.TabBarBackgroundColor="White"
+    Shell.TabBarForegroundColor="#203A54"
+    Shell.TabBarTitleColor="#203A54"
+    Shell.TabBarUnselectedColor="#526171">
 
-    <ShellContent
-        x:Name="SociosContent"
-        Title="Socios"
-        Route="socios" />
+    <TabBar>
+
+        <Tab Title="Socios">
+
+            <ShellContent
+                x:Name="SociosContent"
+                Title="Socios"
+                Route="socios" />
+
+        </Tab>
+
+        <Tab Title="Clima">
+
+            <ShellContent
+                x:Name="ClimaContent"
+                Title="Clima"
+                Route="clima" />
+
+        </Tab>
+
+    </TabBar>
 
 </Shell>
